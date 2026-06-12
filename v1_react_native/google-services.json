@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "424086490985",
+    "project_id": "wasify-dbf0d",
+    "storage_bucket": "wasify-dbf0d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424086490985:android:943ed746fb8955dfd737f8",
+        "android_client_info": {
+          "package_name": "com.wasify.firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXxhiADneg0duxolU1KAXB4UPLLihFKHI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
