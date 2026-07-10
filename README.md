@@ -1,8 +1,29 @@
 # AI-Powered Waste Classification
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ai-wasteclassification.streamlit.app/)
+
 An intelligent waste classification system built using a custom-trained **YOLO11 object detection model** and an interactive **Streamlit web application**. The system enables users to upload or capture images and automatically identify waste items in real time, providing annotated detections, confidence scores, and waste category information.
 
 Designed to support sustainable waste management and recycling initiatives, the application leverages modern computer vision techniques to automate waste segregation across multiple waste categories.
+
+---
+
+## 🚀 Quick Start - Live Demo
+
+The application is **live and ready to use** on Streamlit Community Cloud:
+
+**[👉 Access the App Here: https://ai-wasteclassification.streamlit.app/](https://ai-wasteclassification.streamlit.app/)**
+
+### Using the Live App
+
+1. Visit the link above
+2. Create a new account or log in
+3. Upload an image or capture one with your camera
+4. Adjust the confidence threshold if needed
+5. Click **Analyze** to get instant waste classification results
+6. View detection history in your dashboard
+
+No installation required! The app is ready to use in your browser.
 
 ---
 
@@ -16,7 +37,7 @@ Unlike traditional image classification systems, the model performs **object det
 
 ## Key Features
 
-### Computer Vision
+### 🤖 Computer Vision
 
 * Real-time waste detection using a fine-tuned YOLO11 model
 * Multi-object detection within a single image
@@ -25,21 +46,23 @@ Unlike traditional image classification systems, the model performs **object det
 * Confidence score reporting
 * Custom-trained waste dataset support
 
-### User Experience
+### 🎨 User Experience
 
 * Image upload support
-* Live camera capture
+* Live camera capture (browser-based)
 * Interactive Streamlit dashboard
 * Adjustable confidence threshold
 * Instant classification results
+* Real-time annotation overlay
 
-### Data Management
+### 🔐 Authentication & Data Management
 
 * User registration and login system
-* Session management and authentication
+* Secure session management
 * SQLite-based user storage
 * Classification history tracking
-* Local persistence of the most recent scans
+* Local persistence of recent scans
+* Privacy-focused data handling
 
 ---
 
@@ -195,36 +218,50 @@ Before running the project, ensure the following are installed:
 
 # Getting Started
 
-## 1. Clone the Repository
+## 🌐 Using the Deployed Application (Recommended for Users)
+
+The easiest way to use this application is through the live Streamlit deployment:
+
+**[👉 https://ai-wasteclassification.streamlit.app/](https://ai-wasteclassification.streamlit.app/)**
+
+Simply visit the link, create an account, and start classifying waste. No installation or setup required.
+
+---
+
+## 💻 Running Locally (For Development & Training)
+
+If you want to run the application locally or train your own model, follow these steps:
+
+### 1. Clone the Repository
 
 ```bash
 git clone <repository-url>
 cd ai-powered-waste-classification
 ```
 
-## 2. Create a Virtual Environment
+### 2. Create a Virtual Environment
 
-### Windows
+#### Windows
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
-### macOS / Linux
+#### macOS / Linux
 
 ```bash
 python -m venv venv
 source venv/bin/activate
 ```
 
-## 3. Install Dependencies
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 4. Launch the Application
+### 4. Launch the Application Locally
 
 ```bash
 streamlit run app.py
@@ -240,13 +277,36 @@ http://localhost:8501
 
 ## Using the Application
 
-1. Register a new account.
-2. Log in using your credentials.
-3. Upload an image or capture one using the camera.
-4. Adjust the confidence threshold if needed.
-5. Click **Analyze**.
-6. View the detected waste objects, confidence scores, and annotated image.
-7. Access previous scans through the history section.
+1. **Register**: Create a new account with your credentials
+2. **Login**: Access your account dashboard
+3. **Upload/Capture**: Choose to upload an image or capture one using your device camera
+4. **Configure**: Adjust the confidence threshold if needed (default: 0.5)
+5. **Analyze**: Click **Analyze** to run waste detection
+6. **Review Results**: See annotated image with bounding boxes and confidence scores
+7. **History**: Access all your previous scans in the history section
+
+---
+
+## 🚀 Deployment
+
+This application is deployed on **Streamlit Community Cloud**, a free cloud platform for hosting Streamlit apps.
+
+### Deployment Details
+
+- **Platform**: Streamlit Community Cloud
+- **URL**: https://ai-wasteclassification.streamlit.app/
+- **Status**: ✅ Live and accessible
+- **Environment**: Python 3.9+, PyTorch with CPU inference
+- **Database**: SQLite (persisted)
+- **Model**: YOLO11 (waste_model.pt)
+
+### To Deploy Your Own Instance
+
+1. Push your code to a GitHub repository
+2. Go to [Streamlit Community Cloud](https://streamlit.io/cloud)
+3. Create a new app and connect your GitHub repo
+4. Select the branch and `app.py` as the entry point
+5. Deploy!
 
 ---
 
@@ -300,9 +360,35 @@ python fast_train.py
 
 ## Future Enhancements
 
-* Real-time video stream detection
-* Recycling recommendations
-
+- 🎥 Real-time video stream detection
+- ♻️ Recycling recommendations based on detected waste
+- 📊 Analytics dashboard showing detection patterns
+- 🌍 Multi-language support
+- 📱 Mobile app (React Native)
+- 🤝 Community contribution system for model improvements
+- 🔄 Model versioning and A/B testing
+- 🎯 Fine-tuning on regional waste patterns
+- ☁️ Batch processing for bulk image analysis
+- 📈 Advanced metrics and reporting
 
 ---
+
+## 📝 License
+
+This project is open-source and available under the MIT License.
+
+---
+
+## 💬 Support & Feedback
+
+For issues, bug reports, or feature requests, please open an issue on GitHub. We welcome contributions and feedback from the community!
+
+---
+
+## 🙏 Acknowledgments
+
+* [Ultralytics YOLO](https://github.com/ultralytics/ultralytics) - Object detection framework
+* [Streamlit](https://streamlit.io/) - Web app framework
+* [Roboflow](https://roboflow.com/) - Dataset management platform
+* PyTorch and the open-source ML community
 
