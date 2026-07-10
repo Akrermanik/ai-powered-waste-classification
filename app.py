@@ -118,7 +118,7 @@ def apply_custom_css():
 
 HISTORY_FILE = "history.json"
 
-def save_history(label, confidence):
+def save_history(label, confidence, object_count=None, inference_time_ms=None):
     history = []
     if os.path.exists(HISTORY_FILE):
         with open(HISTORY_FILE, "r") as f:
@@ -126,11 +126,18 @@ def save_history(label, confidence):
                 history = json.load(f)
             except json.JSONDecodeError:
                 history = []
-    history.insert(0, {
+
+    entry = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "label": label,
         "confidence": float(confidence)
-    })
+    }
+    if object_count is not None:
+        entry["object_count"] = int(object_count)
+    if inference_time_ms is not None:
+        entry["inference_time_ms"] = int(inference_time_ms)
+
+    history.insert(0, entry)
     history = history[:50]
     with open(HISTORY_FILE, "w") as f:
         json.dump(history, f, indent=4)
@@ -229,14 +236,16 @@ def main():
             if analyze_button and model is not None:
                 with st.spinner("Classifying with YOLO..."):
                     try:
-                        annotated_img_rgb, label_name, top_conf = predict_waste(img_preview, conf_threshold)
-                        
+                        annotated_img_rgb, label_name, top_conf, object_count, inference_time_ms = predict_waste(img_preview, conf_threshold)
+
                         st.session_state.analysis_result = {
                             "image": annotated_img_rgb,
                             "label": label_name,
-                            "confidence": top_conf
+                            "confidence": top_conf,
+                            "object_count": object_count,
+                            "inference_time_ms": inference_time_ms
                         }
-                        save_history(label_name, top_conf)
+                        save_history(label_name, top_conf, object_count=object_count, inference_time_ms=inference_time_ms)
                     except Exception as e:
                         st.error(f"Failed to analyze: {str(e)}")
 
@@ -256,8 +265,8 @@ def main():
                 
                 with st.container(border=True):
                     res = st.session_state.analysis_result
-                    
-                    col_a, col_b = st.columns(2)
+
+                    col_a, col_b, col_c = st.columns(3)
                     with col_a:
                         st.markdown("<br>", unsafe_allow_html=True)
                         if res["label"] == "No Objects Detected":
@@ -266,7 +275,11 @@ def main():
                             st.success(f"✅ Detected Class: **{res['label']}**")
                     with col_b:
                         st.metric(label="AI Confidence", value=f"{res['confidence']*100:.1f}%")
-                    
+                    with col_c:
+                        st.metric(label="Inference Time", value=f"{res.get('inference_time_ms', 0)} ms")
+
+                    st.metric(label="Objects Detected", value=res.get("object_count", 0))
+
                     if st.button("New Scan", key="new_scan", use_container_width=True):
                         st.session_state.image_data = None
                         st.session_state.analysis_result = None
@@ -282,11 +295,12 @@ def main():
                 with st.container(border=True):
                     st.markdown(
                         f'''
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
                             <span style="font-weight: bold; color: white; font-size: 1.1rem;">{item['label']}</span>
                             <span style="color: #10B981; font-weight: bold; font-size: 1.1rem;">{item['confidence']*100:.1f}%</span>
                         </div>
-                        <div style="color: #9CA3AF; font-size: 13px; margin-top: 4px;">{item['timestamp']}</div>
+                        <div style="color: #9CA3AF; font-size: 13px; margin-top: 6px;">Confidence: {item['confidence']*100:.1f}%</div>
+                        <div style="color: #9CA3AF; font-size: 13px; margin-top: 2px;">{item['timestamp']}</div>
                         ''', unsafe_allow_html=True
                     )
 

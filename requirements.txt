@@ -5,3 +5,4 @@ pillow
 roboflow
 streamlit-authenticator
 python-dotenv
+torch
