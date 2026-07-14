@@ -1,11 +1,9 @@
-import cv2
 import os
 import time
 import torch
 from ultralytics import YOLO
 
-# Initialize YOLO model globally
-model_path = 'waste_model.pt'
+model_path = "waste_model.pt"
 model = None
 if os.path.exists(model_path):
     model = YOLO(model_path)
@@ -13,15 +11,6 @@ if os.path.exists(model_path):
         model.to("mps")
 
 def predict_waste(image, confidence_threshold):
-    """
-    Runs YOLO inference on the input image.
-    Returns:
-        annotated_img_rgb (np.array): The image with drawn bounding boxes.
-        label_name (str): The predicted class name.
-        top_conf (float): The confidence score.
-        object_count (int): The number of detected objects.
-        inference_time_ms (int): The inference time in milliseconds.
-    """
     if model is None:
         raise ValueError("Model is not loaded. Please make sure waste_model.pt exists.")
 
@@ -32,7 +21,7 @@ def predict_waste(image, confidence_threshold):
     result = results[0]
 
     annotated_img_bgr = result.plot()
-    annotated_img_rgb = cv2.cvtColor(annotated_img_bgr, cv2.COLOR_BGR2RGB)
+    annotated_img_rgb = annotated_img_bgr[:, :, ::-1]
 
     if len(result.boxes) > 0:
         detected_classes = []
