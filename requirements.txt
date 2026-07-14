@@ -1,6 +1,6 @@
 streamlit
-ultralytics
-opencv-python-headless
+ultralytics==8.4.91
+opencv-python-headless==4.10.0.84
 pillow
 streamlit-authenticator
 python-dotenv
