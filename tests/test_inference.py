@@ -17,7 +17,7 @@ class FakeBoxes:
         self.conf = [b.conf[0] for b in boxes]
         self.cls = [b.cls[0] for b in boxes]
         self.xyxy = [b.xyxy[0] for b in boxes]
-        
+
     def __len__(self):
         return len(self.conf)
 

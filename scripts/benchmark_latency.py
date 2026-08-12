@@ -1,8 +1,11 @@
 import time
+import warnings
+
 import numpy as np
 from PIL import Image
+
 from core.inference import load_model, run_inference
-import warnings
+
 warnings.filterwarnings("ignore")
 
 def benchmark_latency(num_warmup=5, num_runs=50):
