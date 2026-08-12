@@ -2,7 +2,6 @@
 
 import streamlit as st
 
-from database.connection import init_db
 from ui.api_client import WasifyAPIClient
 from ui.auth_pages import render_auth_pages
 from ui.dashboard import render_dashboard
@@ -32,7 +31,6 @@ for key, value in DEFAULT_SESSION.items():
 
 def main() -> None:
     apply_custom_css()
-    init_db()
 
     token = st.session_state.get("access_token")
     api_client = WasifyAPIClient(token=token)
