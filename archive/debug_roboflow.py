@@ -1,5 +1,10 @@
+import os
+
 from roboflow import Roboflow
-rf = Roboflow(api_key="KwL8ZlENF5RK4zoYuCID")
-workspace = rf.workspace()
-print(f"Exact Workspace ID: {getattr(workspace, 'id', getattr(workspace, 'name', 'unknown'))}")
-print(f"Project list: {getattr(workspace, 'project_list', 'none')}")
+
+api_key = os.getenv("ROBOFLOW_API_KEY")
+if not api_key:
+    raise RuntimeError("Set ROBOFLOW_API_KEY in your environment before running this script.")
+
+rf = Roboflow(api_key=api_key)
+print("Roboflow connection successful.")

@@ -1,5 +1,12 @@
+import os
+
 from roboflow import Roboflow
-rf = Roboflow(api_key="KwL8ZlENF5RK4zoYuCID")
+
+api_key = os.getenv("ROBOFLOW_API_KEY")
+if not api_key:
+    raise RuntimeError("Set ROBOFLOW_API_KEY in your environment before running this script.")
+
+rf = Roboflow(api_key=api_key)
 project = rf.workspace("sujals-workspace-5hfno").project("waste-dataset-v5-prev-wpqez")
 version = project.version(2)
 dataset = version.download("yolov11")
