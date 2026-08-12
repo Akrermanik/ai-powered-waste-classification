@@ -25,7 +25,7 @@ DATABASE_PATH = os.getenv(
 ).replace("sqlite:///", "")
 
 # Model
-MODEL_PATH = os.getenv("MODEL_PATH", str(PROJECT_ROOT / "waste_model.pt"))
+MODEL_PATH = os.getenv("MODEL_PATH", str(PROJECT_ROOT / "models" / "waste_model.pt"))
 DEFAULT_CONFIDENCE = float(os.getenv("DEFAULT_CONFIDENCE", "0.5"))
 
 # API

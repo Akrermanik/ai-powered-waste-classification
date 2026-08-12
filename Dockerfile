@@ -4,8 +4,8 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends libgl1 && rm -rf /var/lib/apt/lists/*
 
-COPY requirements-backend.txt .
-RUN pip install --no-cache-dir -r requirements-backend.txt
+COPY requirements/backend.txt requirements/backend.txt
+RUN pip install --no-cache-dir -r requirements/backend.txt
 
 COPY . .
 

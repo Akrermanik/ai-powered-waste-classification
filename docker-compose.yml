@@ -6,10 +6,10 @@ services:
     environment:
       WASIFY_AUTH_SECRET: ${WASIFY_AUTH_SECRET:-change-me-in-production}
       DATABASE_URL: /data/wasify.db
-      MODEL_PATH: /app/waste_model.pt
+      MODEL_PATH: /app/models/waste_model.pt
     volumes:
       - wasify_data:/data
-      - ./waste_model.pt:/app/waste_model.pt:ro
+      - ./models/waste_model.pt:/app/models/waste_model.pt:ro
 
   streamlit:
     build: .
